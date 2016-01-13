@@ -225,7 +225,7 @@ exec gajim
 exec hipchat
 exec /home/joop/scripts/startsyncthing.sh
 exec keepass2
-exec feh --bg-center /media/joop/Shared/wallpaper.jpg
+exec feh --bg-fill ~/.dotfiles/wallpaper.jpg
 exec compton
 
 
