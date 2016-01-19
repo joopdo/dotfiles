@@ -17,15 +17,15 @@
   set $base0E #c0b7f9
   set $base0F #fcc09e
 
-  set $workspace1 "1: "
-  set $workspace2 "2: "
-  set $workspace3 "3: "
-  set $workspace4 "4: "
-  set $workspace5 "5: "
-  set $workspace6 "6: "
-  set $workspace7 "7: "
-  set $workspace8 "8: "
-  set $workspace9 "9: "
+  set $workspace1 "1: 1"
+  set $workspace2 "2: 2"
+  set $workspace3 "3: 3"
+  set $workspace4 "4: 4"
+  set $workspace5 "5: 5"
+  set $workspace6 "6: 6"
+  set $workspace7 "7: 7"
+  set $workspace8 "8: 8"
+  set $workspace9 "9: 9"
   set $workspace10 "10: "
 
 
@@ -221,11 +221,11 @@ exec xflux -l 52.3702 -g 4.7
 exec --no-startup-id nm-applet
 exec --no-startup-id xfsettingsd
 exec /usr/bin/ibus-daemon
-#exec gajim
-#exec hipchat
+exec gajim
+exec hipchat
 exec /home/joop/scripts/startsyncthing.sh
 exec keepass2
-exec feh --bg-fill ~/.dotfiles/wallpaper.jpg
+exec feh --bg-center /media/joop/Shared/wallpaper.jpg
 exec compton
 
 
