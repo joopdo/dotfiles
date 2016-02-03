@@ -1,0 +1,8 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Comment=
+Terminal=false
+Name=remove current song
+Exec=/usr/bin/deletesong.sh
+Type=Application
+Icon=gnome-panel-launcher
