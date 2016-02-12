@@ -1,10 +1,11 @@
+execute pathogen#infect()
+filetype plugin indent on
 set nocompatible
-filetype plugin on
 syntax on 
 set number
 set relativenumber
-set autoindent
 set ignorecase
+set paste
 map <up> <nop>
 map <down> <nop>
 map <left> <nop>
