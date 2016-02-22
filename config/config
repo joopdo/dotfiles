@@ -39,8 +39,11 @@
 	 hide_edge_borders both
 	 new_window none
 	 smart_borders on
-	  gaps inner 10
-	  gaps outer 10
+	 gaps inner 10
+	 gaps outer 10
+	 new_window pixel 3
+	 focus_follows_mouse  no
+  	 force_focus_wrapping yes
 
 # Restart-Related Bindings
 	bindsym $mod+Shift+c reload
@@ -110,54 +113,60 @@ bindsym $mod+r mode " "
   bindsym $mod+1 workspace $workspace1
   bindsym $mod+2 workspace $workspace2
   bindsym $mod+3 workspace $workspace3
-  bindsym $mod+4 workspace $workspace4
-  bindsym $mod+5 workspace $workspace5
-  bindsym $mod+6 workspace $workspace6
-  bindsym $mod+7 workspace $workspace7
-  bindsym $mod+8 workspace $workspace8
-  bindsym $mod+9 workspace $workspace9
-  bindsym $mod+0 workspace $workspace10
+  #bindsym $mod+4 workspace $workspace4
+  #bindsym $mod+5 workspace $workspace5
+  #bindsym $mod+6 workspace $workspace6
+  #bindsym $mod+7 workspace $workspace7
+  #bindsym $mod+8 workspace $workspace8
+  #bindsym $mod+9 workspace $workspace9
+  #bindsym $mod+0 workspace $workspace10
 
   bindsym $mod+Shift+1 move container to workspace $workspace1
   bindsym $mod+Shift+2 move container to workspace $workspace2
   bindsym $mod+Shift+3 move container to workspace $workspace3
-  bindsym $mod+Shift+4 move container to workspace $workspace4
-  bindsym $mod+Shift+5 move container to workspace $workspace5
-  bindsym $mod+Shift+6 move container to workspace $workspace6
-  bindsym $mod+Shift+7 move container to workspace $workspace7
-  bindsym $mod+Shift+8 move container to workspace $workspace8
-  bindsym $mod+Shift+9 move container to workspace $workspace9
-  bindsym $mod+Shift+0 move container to workspace $workspace10
+  #bindsym $mod+Shift+4 move container to workspace $workspace4
+  #bindsym $mod+Shift+5 move container to workspace $workspace5
+  #bindsym $mod+Shift+6 move container to workspace $workspace6
+  #bindsym $mod+Shift+7 move container to workspace $workspace7
+  #bindsym $mod+Shift+8 move container to workspace $workspace8
+  #bindsym $mod+Shift+9 move container to workspace $workspace9
+  #bindsym $mod+Shift+0 move container to workspace $workspace10
 
 # Workspace Monitors
   workspace $workspace1 output $monitor1
   workspace $workspace2 output $monitor2
   workspace $workspace3 output $monitor2
-  workspace $workspace4 output $monitor2
-  workspace $workspace5 output $monitor2
-  workspace $workspace6 output $monitor2
-  workspace $workspace7 output $monitor2
-  workspace $workspace8 output $monitor2
-  workspace $workspace9 output $monitor2
-  workspace $workspace10 output $monitor2
+  #workspace $workspace4 output $monitor2
+  #workspace $workspace5 output $monitor2
+  #workspace $workspace6 output $monitor2
+  #workspace $workspace7 output $monitor2
+  #workspace $workspace8 output $monitor2
+  #workspace $workspace9 output $monitor2
+  #workspace $workspace10 output $monitor2
 
 # Program Workspaces
 #  assign [class="Mate-terminal"] $workspace4
 #  assign [class="Iceweasel"] $workspace3
   assign [class="HipChat"] $workspace1
-  assign [class="Rhytmbox"] $workspace9
-  assign [class="KeePass2"] $workspace10
-  assign [class="Caja"] $workspace5
-  assign [class="Icedove"] $workspace2
+  assign [class="Rhytmbox"] $workspace2
+  assign [class="KeePass2"] $workspace2
+  assign [class="Caja"] $workspace2
+  assign [class="Icedove"] $workspace1
 
 
-client.background			#121212
+#client.background			#121212
 #                         border  background text    indicator
-  client.focused          $base01 $base01    $base07 $base0F
-  client.focused_inactive $base02 $base02    $base03 $base0F
-  client.unfocused        $base02 $base02    $base03 $base0F
-  client.urgent           $base02 $base08    $base00 $base0F
+#  client.focused          $base01 $base01    $base07 $base0F
+#  client.focused_inactive $base02 $base02    $base03 $base0F
+#  client.unfocused        $base02 $base02    $base03 $base0F
+#  client.urgent           $base02 $base08    $base00 $base0F
 
+set $gray1 #373d48
+set $gray2 #29303a
+
+client.focused            $gray1   $gray1   #FFFFFF   $gray1
+client.focused_inactive   $gray2   $gray2   #FFFFFF   #000000
+client.unfocused          $gray2   $gray2   #FFFFFF   #000000
 
 bar {
    font pango: System San Francisco Display, FontAwesome 11
@@ -166,8 +175,8 @@ bar {
    strip_workspace_numbers yes
 
    height 25
- bindsym button4 nop
- bindsym button5 nop
+ #bindsym button4 nop
+ #bindsym button5 nop
    colors {
      separator $base03
      background $base01
