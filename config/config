@@ -36,7 +36,6 @@
 # General Configuration
 	 font pango:System San Francisco Display 10
 	 floating_modifier $mod
-	 hide_edge_borders both
 	 new_window none
 	 smart_borders on
 	 gaps inner 10
@@ -44,6 +43,7 @@
 	 new_window pixel 3
 	 focus_follows_mouse  no
   	 force_focus_wrapping yes
+	 hide_edge_borders none
 
 # Restart-Related Bindings
 	bindsym $mod+Shift+c reload
@@ -156,10 +156,6 @@ bindsym $mod+r mode " "
 
 #client.background			#121212
 #                         border  background text    indicator
-#  client.focused          $base01 $base01    $base07 $base0F
-#  client.focused_inactive $base02 $base02    $base03 $base0F
-#  client.unfocused        $base02 $base02    $base03 $base0F
-#  client.urgent           $base02 $base08    $base00 $base0F
 
 set $gray1 #373d48
 set $gray2 #29303a
@@ -168,8 +164,15 @@ client.focused            $gray1   $gray1   #FFFFFF   $gray1
 client.focused_inactive   $gray2   $gray2   #FFFFFF   #000000
 client.unfocused          $gray2   $gray2   #FFFFFF   #000000
 
+# Window borders
+new_window 1pixel
+smart_borders on
+gaps inner 5
+gaps outer 5
+
+
 bar {
-   font pango: System San Francisco Display, FontAwesome 11
+   font pango: System San Francisco Display, FontAwesome 10
    status_command i3blocks
    position bottom
    strip_workspace_numbers yes
@@ -208,4 +211,5 @@ exec --no-startup-id compton
 exec --no-startup-id hipchat
 exec --no-startup-id caja
 exec --no-startup-id icedove
+
 
