@@ -160,9 +160,13 @@ bindsym $mod+r mode " "
 set $gray1 #373d48
 set $gray2 #29303a
 
-client.focused            $gray1   $gray1   #FFFFFF   $gray1
-client.focused_inactive   $gray2   $gray2   #FFFFFF   #000000
-client.unfocused          $gray2   $gray2   #FFFFFF   #000000
+
+client.focused               #FFFFFF #FFFFFF #FFFFFF
+client.focused_inactive #FFFFFF #FFFFFF #FFFFFF
+
+#client.focused            $gray1   $gray1   #FFFFFF   $gray1
+#client.focused_inactive   $gray2   $gray2   #FFFFFF   #000000
+client.unfocused          #FFFFFF #FFFFFF   #FFFFFF   #000000
 
 # Window borders
 new_window 1pixel
@@ -181,8 +185,8 @@ bar {
  #bindsym button4 nop
  #bindsym button5 nop
    colors {
-     separator $base03
-     background $base01
+#     separator $base03
+#     background $base01
      statusline $base05
 #                        border  background text
      focused_workspace  $base01 $base01    $base07
