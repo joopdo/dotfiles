@@ -11,6 +11,7 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 colors industry
 set autoindent
+set cursorline
 
 
 let g:syntastic_always_populate_loc_list = 1
