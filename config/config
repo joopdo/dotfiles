@@ -19,9 +19,9 @@
   set $base0E #c0b7f9
   set $base0F #fcc09e
 
-  set $workspace1 "1: "
-  set $workspace2 "2: "
-  set $workspace3 "3: "
+  set $workspace1 "1"
+  set $workspace2 "2"
+  set $workspace3 "3"
   set $workspace4 "4: "
   set $workspace5 "5: "
   set $workspace6 "6: "
@@ -36,15 +36,16 @@
 # General Configuration
 	 font pango:System San Francisco Display 10
 	 floating_modifier $mod
+	 hide_edge_borders both
 	 new_window none
 	 smart_borders on
 	 gaps inner 10
 	 gaps outer 10
-	 new_window pixel 3
+	# new_window pixel 3
 	 focus_follows_mouse  no
   	 force_focus_wrapping yes
-	 hide_edge_borders none
-
+	for_window [class="^.*"] border pixel 3
+	
 # Restart-Related Bindings
 	bindsym $mod+Shift+c reload
 	bindsym $mod+Shift+r restart
@@ -68,25 +69,25 @@
 	bindsym $mod+Shift+d exec xrandr --output LVDS-0 --auto --output DP-0 --auto --right-of LVDS-0
 
 # Window related bindings
-	bindsym $mod+j focus left
-	bindsym $mod+k focus down
-	bindsym $mod+l focus up
-	bindsym $mod+semicolon focus right
+	bindsym $mod+h focus left
+	bindsym $mod+j focus down
+	bindsym $mod+k focus up
+	bindsym $mod+l focus right
 	#bindsym $mod+Left focus left
 	#bindsym $mod+Down focus down
 	#bindsym $mod+Up focus up
 	#bindsym $mod+Right focus right
-	bindsym $mod+Shift+j move left
-	bindsym $mod+Shift+k move down
-	bindsym $mod+Shift+l move up
-	bindsym $mod+Shift+semicolon move right
+	bindsym $mod+Shift+h move left
+	bindsym $mod+Shift+j move down
+	bindsym $mod+Shift+k move up
+	bindsym $mod+Shift+l move right
 	# alternatively, you can use the cursor keys:
 	#bindsym $mod+Shift+Left move left
 	#bindsym $mod+Shift+Down move down
 	#bindsym $mod+Shift+Up move up
 	#bindsym $mod+Shift+Right move right
-	bindsym $mod+minus split h
-	bindsym $mod+pipe split v
+	bindsym $mod+semicolumn split h
+	bindsym $mod+comma split v
 	bindsym $mod+f fullscreen
 	bindsym $mod+s layout stacking
 	bindsym $mod+w layout tabbed
@@ -96,10 +97,10 @@
 	bindsym $mod+space focus mode_toggle
 
 	mode " " {
-		bindsym j resize shrink width 10 px or 10 ppt
-		bindsym k resize grow height 10 px or 10 ppt
-		bindsym l resize shrink height 10 px or 10 ppt
-		bindsym semicolon resize grow width 10 px or 10 ppt
+		bindsym h resize shrink width 10 px or 10 ppt
+		bindsym j resize grow height 10 px or 10 ppt
+		bindsym k resize shrink height 10 px or 10 ppt
+		bindsym l resize grow width 10 px or 10 ppt
 
 		# back to normal: Enter or Escape
 		bindsym Return mode "default"
@@ -156,27 +157,20 @@ bindsym $mod+r mode " "
 
 #client.background			#121212
 #                         border  background text    indicator
+#  client.focused          $base01 $base01    $base07 $base0F
+#  client.focused_inactive $base02 $base02    $base03 $base0F
+#  client.unfocused        $base02 $base02    $base03 $base0F
+#  client.urgent           $base02 $base08    $base00 $base0F
 
 set $gray1 #373d48
 set $gray2 #29303a
 
-
-client.focused               #FFFFFF #FFFFFF #FFFFFF
-client.focused_inactive #FFFFFF #FFFFFF #FFFFFF
-
-#client.focused            $gray1   $gray1   #FFFFFF   $gray1
-#client.focused_inactive   $gray2   $gray2   #FFFFFF   #000000
-client.unfocused          #FFFFFF #FFFFFF   #FFFFFF   #000000
-
-# Window borders
-new_window 1pixel
-smart_borders on
-gaps inner 5
-gaps outer 5
-
+client.focused            $gray1   $gray1   #FFFFFF   $gray1
+client.focused_inactive   $gray2   $gray2   #FFFFFF   #000000
+client.unfocused          $gray2   $gray2   #FFFFFF   #000000
 
 bar {
-   font pango: System San Francisco Display, FontAwesome 10
+   font pango: System San Francisco Display, FontAwesome 11
    status_command i3blocks
    position bottom
    strip_workspace_numbers yes
@@ -187,12 +181,12 @@ bar {
    colors {
 #     separator $base03
 #     background $base01
-     statusline $base05
+#     statusline $base05
 #                        border  background text
-     focused_workspace  $base01 $base01    $base07
-     active_workspace   $base01 $base02    $base03
-     inactive_workspace $base01 $base01    $base03
-     urgent_workspace   $base01 $base01    $base08
+#     focused_workspace  $base01 $base01    $base07
+#     active_workspace   $base01 $base02    $base03
+#     inactive_workspace $base01 $base01    $base03
+#     urgent_workspace   $base01 $base01    $base08
      }
  }
 
@@ -212,8 +206,7 @@ exec --no-startup-id /home/joop/scripts/startsyncthing.sh
 exec --no-startup-id keepass2
 exec --no-startup-id feh --bg-fill ~/.dotfiles/wallpaper.jpg
 exec --no-startup-id compton
-exec --no-startup-id hipchat
-exec --no-startup-id caja
-exec --no-startup-id icedove
-
+#exec --no-startup-id hipchat
+#exec --no-startup-id caja
+#exec --no-startup-id icedove
 
