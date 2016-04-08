@@ -172,7 +172,8 @@ client.unfocused          $gray2   $gray2   #FFFFFF   #000000
 bar {
    font pango: System San Francisco Display, FontAwesome 11
    status_command i3blocks
-   position bottom
+#   status_command python /usr/share/powerline/bindings/i3/powerline-i3.py
+position bottom
    strip_workspace_numbers yes
 
    height 25
