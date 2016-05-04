@@ -47,6 +47,7 @@ bindsym Mod1+Shift+q kill
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
  bindsym Mod1+d exec --no-startup-id i3-dmenu-desktop
+bindsym Mod1+shift+d exec --no-startup-id /usr/bin/passmenu
 bindsym Mod1+shift+Return exec chromium
 # change focus
 bindsym Mod1+$left focus left
@@ -104,6 +105,10 @@ bindsym Mod1+Shift+minus move scratchpad
 # Show the next scratchpad window or hide the focused scratchpad window.
 # If there are multiple scratchpad windows, this command cycles through them.
 bindsym Mod1+minus scratchpad show
+
+for_window [title="taskwin"] floating enable
+bindsym $Mod1+o exec urxvt -title taskwin -e sh ~/usr/bin/display_tasks.sh
+
 
 # switch to workspace
 bindsym Mod1+1 workspace 1
@@ -181,4 +186,4 @@ exec --no-startup-id /home/joop/scripts/startsyncthing.sh
 #exec --no-startup-id keepass2
 exec --no-startup-id feh --bg-fill ~/.dotfiles/wallpaper.jpg
 #exec --no-startup-id compton
-
+exec --no-startup-id /usr/bin/owncloud
