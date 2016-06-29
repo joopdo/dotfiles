@@ -14,7 +14,7 @@ IFS='
 PIC=$(find . -size +1M -print | grep -i '.*[.]jpg' | shuf -n1)
 echo $DIR/$PIC
 # Command to set Background Image
-gsettings set org.mate.background picture-filename $DIR/$PIC
+gsettings set org.gnome.desktop.background picture-uri "file://$DIR/$PIC"
 
 # specify how long to wait in seconds between changes
 #sleep 600
