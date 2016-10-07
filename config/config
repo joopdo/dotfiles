@@ -1,189 +1,237 @@
-# i3 config file (v4)
+# Constants
+  set $mod mod4
+
+# Number of pixels to resize by in resize mode.
+  set $resize     5
+
+  #set $base00 #101218
+  #set $base01 #1f222d
+  #set $base02 #252936
+  #set $base03 #7780a1
+  #set $base04 #C0C5CE
+  #set $base05 #d1d4e0
+  #set $base06 #C9CCDB
+  #set $base07 #ffffff
+  #set $base08 #ee829f
+  #set $base09 #f99170
+  #set $base0A #ffefcc
+  #set $base0B #a5ffe1
+  #set $base0C #97e0ff
+  #set $base0D #97bbf7
+  #set $base0E #c0b7f9
+  #set $base0F #fcc09e
+
+  set $workspace1 "1:"
+  set $workspace2 "2:"
+  set $workspace3 "3: "
+  set $workspace4 "4:"
+  set $workspace5 "5:&#xf019;"
+  set $workspace6 "6:"
+  set $workspace7 "7:"
+  set $workspace8 "8:"
+  set $workspace9 "9:"
+  set $workspace10 "0:"
+
+  #set $monitor1 "DVI-I-2"
+  #set $monitor2 "DVI-I-3"
+
+# General Configuration
+  font pango:System Noto Sans 12
+  floating_modifier $mod
+  hide_edge_borders both
+  new_window none
+  smart_borders on
+  gaps inner 10
+  gaps outer 15
+  new_float	pixel 	5
+  new_window  pixel 	5
+
+
+# Scratchpad
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+# Change focus
+ # focus_follows_mouse no
+focus_follows_mouse true
+popup_during_fullscreen smart
 #
-# Please see http://i3wm.org/docs/userguide.html for a complete reference!
 #
-# This config file uses keycodes (bindsym) and was written for the QWERTY
-# layout.
+# Window-Related Bindings
+  bindsym $mod+q kill
+#bindsym $mod+d exec dmenu
+bindsym $mod+shift+d exec passmenu 
+ bindsym $mod+h focus left
+  bindsym $mod+j focus down
+  bindsym $mod+k focus up
+  bindsym $mod+l focus right
+# Alternatively, you can use the cursor keys:
+ bindsym $mod+Left focus left
+ bindsym $mod+Down focus down
+ bindsym $mod+Up focus up
+ bindsym $mod+Right focus right
+
+  bindsym $mod+Shift+h move left
+  bindsym $mod+Shift+j move down
+  bindsym $mod+Shift+k move up
+  bindsym $mod+Shift+l move right
+# Alternatively, you can use the cursor keys:
+ bindsym $mod+Shift+Left focus left
+ bindsym $mod+Shift+Down focus down
+ bindsym $mod+Shift+Up focus up
+ bindsym $mod+Shift+Right focus right
+ 
+
+# Workspace back and forth (with/without active container)
+ workspace_auto_back_and_forth yes
+ bindsym $mod+c workspace back_and_forth;exec notify-send 'back and forth'
+ bindsym $mod+Shift+c move container to workspace back_and_forth; workspace back_and_forth
+
+# Split in horizontal orientation
+bindsym $mod+g split h;exec notify-send 'split horizontally'
+# Split in vertical orientation
+bindsym $mod+v split v;exec notify-send 'split vertically'
+
+  bindsym $mod+Shift+space floating toggle;exec notify-send 'floating'
+  bindsym $mod+f fullscreen toggle
+# Change container layout (stacked, tabbed, toggle split)
+ bindsym $mod+s layout stacking;exec notify-send 'stacking'
+ bindsym $mod+w layout tabbed;exec notify-send 'tabbed'
+ bindsym $mod+e layout toggle split;exec notify-send 'split'
 #
-# To get a config file with the same key positions, but for your current
-# layout, use the i3-config-wizard
 #
-set $mod Mod4
+ #bindsym $mod+Shift+h split h
+  bindsym $mod+space focus mode_toggle
+  bindsym $mod+r mode "  ";exec notify-send 'resize'
+  mode "  " {
+  bindsym h resize shrink width 10 px or 10 ppt
+  bindsym j resize grow height 10 px or 10 ppt
+  bindsym k resize shrink height 10 px or 10 ppt
+  bindsym l resize grow width 10 px or 10 ppt
+  bindsym Escape mode "default"
+  }
 
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
-font pango:monospace 8
+# Restart-Related Bindings
+ # bindsym $mod+Shift+c reload
+  bindsym $mod+Shift+r restart
 
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
+# Program-Related Bindings
+  bindsym $mod+Return 	  exec mate-terminal
+bindsym shift+$mod+Return exec qutebrowser  
+bindsym $mod+b          exec firefox
+#  bindsym $mod+x          exec lxappearance
+#  bindsym $mod+a          exec atom
+#  bindsym $mod+e          exec eclipse
+#  bindsym $mod+z	        exec discord
+bindsym $mod+d exec rofijoop
+#  -show run -lines 3 -color-normal "#2a2337","#FFF","#2a2337","#fff","#2A2337" -color-window "#2a2337","#FFF","#2a2337","2a2337"
+#-show run -lines 3 -font "Noto Sans 16" -color-normal "#2a2337","#FFF","#2a2337","#FFF","#2A2337" -color-window "#2a2337","#FFF","#2a2337","FFF"
 
-# Before i3 v4.8, we used to recommend this one as the default:
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, its unicode glyph coverage is limited, the old
-# X core fonts rendering does not support right-to-left and this being a bitmap
-# font, it doesn’t scale on retina/hidpi displays.
-
-# use these keys for focus, movement, and resize directions when reaching for
-# the arrows is not convenient
-set $up l
-set $down k
-set $left j
-set $right semicolon
-
-# use Mouse+Mod1 to drag floating windows to their wanted position
-floating_modifier Mod1
-
-# start a terminal
-bindsym Mod1+Return exec mate-terminal
-
-# kill focused window
-bindsym Mod1+Shift+q kill
-
-# start dmenu (a program launcher)
-#bindsym Mod1+d exec dmenu_run
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
- bindsym Mod1+d exec --no-startup-id i3-dmenu-desktop
-bindsym Mod1+shift+d exec --no-startup-id /usr/bin/passmenu
-bindsym Mod1+shift+Return exec chromium
-# change focus
-bindsym Mod1+$left focus left
-bindsym Mod1+$down focus down
-bindsym Mod1+$up focus up
-bindsym Mod1+$right focus right
-
-# alternatively, you can use the cursor keys:
-bindsym Mod1+Left focus left
-bindsym Mod1+Down focus down
-bindsym Mod1+Up focus up
-bindsym Mod1+Right focus right
-
-# move focused window
-bindsym Mod1+Shift+$left move left
-bindsym Mod1+Shift+$down move down
-bindsym Mod1+Shift+$up move up
-bindsym Mod1+Shift+$right move right
-
-# alternatively, you can use the cursor keys:
-bindsym Mod1+Shift+Left move left
-bindsym Mod1+Shift+Down move down
-bindsym Mod1+Shift+Up move up
-bindsym Mod1+Shift+Right move right
-
-# split in horizontal orientation
-bindsym Mod1+h split h
-
-# split in vertical orientation
-bindsym Mod1+v split v
-
-# enter fullscreen mode for the focused container
-bindsym Mod1+f fullscreen toggle
-
-# change container layout (stacked, tabbed, toggle split)
-bindsym Mod1+s layout stacking
-bindsym Mod1+w layout tabbed
-bindsym Mod1+e layout toggle split
-
-# toggle tiling / floating
-bindsym Mod1+Shift+space floating toggle
-
-# change focus between tiling / floating windows
-bindsym Mod1+space focus mode_toggle
-
-# focus the parent container
-bindsym Mod1+a focus parent
-
-# focus the child container
-#bindsym Mod1+d focus child
-
-# move the currently focused window to the scratchpad
-bindsym Mod1+Shift+minus move scratchpad
-
-# Show the next scratchpad window or hide the focused scratchpad window.
-# If there are multiple scratchpad windows, this command cycles through them.
-bindsym Mod1+minus scratchpad show
-
-for_window [title="taskwin"] floating enable
-bindsym $Mod1+o exec urxvt -title taskwin -e sh ~/usr/bin/display_tasks.sh
+#rofi -show run -lines 3 -eh 2 -width 100 -padding 300  -opacity "80" -bw 0 -bc "#221d3b" -bg "#2a2337" -fg "#FFF" -hlbg "#80CBC4" -hlfg "#2a2337" -font "Noto Sans 18"
+#  bindsym --release Print exec imgur-screenshot
+  bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 
-# switch to workspace
-bindsym Mod1+1 workspace 1
-bindsym Mod1+2 workspace 2
-bindsym Mod1+3 workspace 3
-bindsym Mod1+4 workspace 4
-bindsym Mod1+5 workspace 5
-bindsym Mod1+6 workspace 6
-bindsym Mod1+7 workspace 7
-bindsym Mod1+8 workspace 8
-bindsym Mod1+9 workspace 9
-bindsym Mod1+0 workspace 10
 
-# move focused container to workspace
-bindsym Mod1+Shift+1 move container to workspace 1
-bindsym Mod1+Shift+2 move container to workspace 2
-bindsym Mod1+Shift+3 move container to workspace 3
-bindsym Mod1+Shift+4 move container to workspace 4
-bindsym Mod1+Shift+5 move container to workspace 5
-bindsym Mod1+Shift+6 move container to workspace 6
-bindsym Mod1+Shift+7 move container to workspace 7
-bindsym Mod1+Shift+8 move container to workspace 8
-bindsym Mod1+Shift+9 move container to workspace 9
-bindsym Mod1+Shift+0 move container to workspace 10
+# Volume & Media Bindings
+  bindsym XF86AudioLowerVolume exec --no-startup-id pulseaudio-ctl down
+  bindsym XF86AudioRaiseVolume exec --no-startup-id pulseaudio-ctl up
+  bindsym XF86AudioMute exec --no-startup-id pulseaudio-ctl mute
+  bindsym XF86AudioPlay exec playerctl play-pause
+  bindsym XF86AudioPause exec playerctl pause
+  bindsym XF86AudioNext exec playerctl next
+  bindsym XF86AudioPrev exec playerctl previous
 
-# reload the configuration file
-bindsym Mod1+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym Mod1+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym Mod1+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# Startup Programs
+  exec --no-startup-id nm-applet
+  exec --no-startup-id dunst
+  exec_always --no-startup-id feh --bg-scale ~/.wallpaper.jpg
 
-# resize window (you can also use the mouse for that)
-mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+# Workspace-Related Bindings
+  bindsym $mod+1 workspace $workspace1
+  bindsym $mod+2 workspace $workspace2
+  bindsym $mod+3 workspace $workspace3
+  bindsym $mod+4 workspace $workspace4
+  bindsym $mod+5 workspace $workspace5
+  bindsym $mod+6 workspace $workspace6
+  bindsym $mod+7 workspace $workspace7
+  bindsym $mod+8 workspace $workspace8
+  bindsym $mod+9 workspace $workspace9
+  bindsym $mod+0 workspace $workspace10
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym $left       resize shrink width 10 px or 10 ppt
-        bindsym $down       resize grow height 10 px or 10 ppt
-        bindsym $up         resize shrink height 10 px or 10 ppt
-        bindsym $right      resize grow width 10 px or 10 ppt
+  #bindsym $mod+. workspace next|prev|next_on_output|prev_on_output
 
-        # same bindings, but for the arrow keys
-        bindsym Left        resize shrink width 10 px or 10 ppt
-        bindsym Down        resize grow height 10 px or 10 ppt
-        bindsym Up          resize shrink height 10 px or 10 ppt
-        bindsym Right       resize grow width 10 px or 10 ppt
+  bindsym $mod+Shift+1 move container to workspace $workspace1
+  bindsym $mod+Shift+2 move container to workspace $workspace2
+  bindsym $mod+Shift+3 move container to workspace $workspace3
+  bindsym $mod+Shift+4 move container to workspace $workspace4
+  bindsym $mod+Shift+5 move container to workspace $workspace5
+  bindsym $mod+Shift+6 move container to workspace $workspace6
+  bindsym $mod+Shift+7 move container to workspace $workspace7
+  bindsym $mod+Shift+8 move container to workspace $workspace8
+  bindsym $mod+Shift+9 move container to workspace $workspace9
+  bindsym $mod+Shift+0 move container to workspace $workspace10
 
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
+# Workspace Monitors
+  workspace $workspace1 output $monitor1
+  workspace $workspace2 output $monitor1
+  workspace $workspace3 output $monitor1
+  workspace $workspace4 output $monitor1
+  workspace $workspace5 output $monitor1
+  workspace $workspace6 output $monitor1
+  workspace $workspace9 output $monitor1
+  workspace $workspace10 output $monitor1
 
-bindsym Mod1+r mode "resize"
+# Program Workspaces
+  assign [class="Thunderbird"] $workspace1
+  assign [class="Firefox"] $workspace2
+  assign [class="qutebrowser"] $workspace2
+  assign [class="Caja"] $workspace4
+  assign [class="Atom"] $workspace3
+  assign [class="Eclipse"] $workspace3
+  assign [class="libreoffice*"] $workspace6
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-        status_command i3status
-}
-exec --no-startup-id mate-power-manager                                  
-exec --no-startup-id mate-volume-control-applet 
-#exec --no-startup-id gnome-keyring-daemon –start
-exec --no-startup-id xflux -l 52.3702 -g 4.7
+# Floating
+  for_window [class="Lxappearance"] floating enable
+  for_window [class="Seahorse"] floating enable
+  for_window [class="Pavucontrol"] floating enable
 
-exec --no-startup-id nm-applet
-exec --no-startup-id xfsettingsd
-#exec --no-startup-id /usr/bin/ibus-daemon
-#exec gajim
-#exec hipchat
-exec --no-startup-id /home/joop/scripts/startsyncthing.sh
-#exec --no-startup-id keepass2
-exec --no-startup-id feh --bg-fill ~/.dotfiles/wallpaper.jpg
-#exec --no-startup-id compton
-exec --no-startup-id /usr/bin/owncloud
+# Window colours:
+
+   client.focused              #382449 #6A248D #ebdbb2 #12fee7
+   client.focused_inactive     #382449 #382449 #ebdbb2 #382449
+   client.unfocused            #382449 #382449 #ebdbb2 #382449
+   client.urgent               #bf616a #bf616a #ee0000 #bf616a
+
+
+#Bar  
+  bar {
+    strip_workspace_numbers no
+    position top
+    height 30
+    status_command i3blocks -c ~/.config/i3/i3blocks.conf
+    separator_symbol "|"
+    #tray_output none
+    font pango: Noto Sans, FontAwesome Regular 11
+  colors {
+    background #2a2337
+    statusline #ffffff
+    separator #ffffff
+    focused_workspace 	#12fee7 	#12fee7 	#000000
+    active_workspace 	#12fee7 	#221d3b 	#ffffff
+    inactive_workspace 	#221d3b 	#221d3b 	#ffffff
+    urgent_workspace 	#bf616a 	#65737e 	#ffffff
+    }
+   }
+ exec --no-startup-id mate-power-manager
+ exec --no-startup-id mate-volume-control-applet
+ #exec --no-startup-id xflux -l 30.658602 -g 104.064857
+ exec --no-startup-id /usr/lib/mate-user-share/mate-user-share
+ exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
+ exec --no-startup-id start-pulseaudio-x11
+ exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
+ exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=ssh
+ exec --no-startup-id xmodmap /home/joop/.Xmodmap
+ exec --no-startup-id xcalib  /usr/share/ICC/Color\ LCD-933C106C-08BC-09AA-F750-C2A74A119DEF.icc
+#exec --no-startup-id compton 
+exec --no-startupid /usr/lib/mate-settings-daemon/mate-settings-daemon
