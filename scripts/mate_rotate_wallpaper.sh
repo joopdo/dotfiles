@@ -1,9 +1,9 @@
 # Script to randomly set Background from files in a directory
 
-#while true;do
-cd "/media/suna/large_disk/docs_backup/Photos and videos"
+while true;do
+cd "/media/largedisk/syncthing/pictures"
 # Directory Containing Pictures -- EDIT THIS LINE 
-DIR="/media/suna/large_disk/docs_backup/Photos and videos"
+DIR="/media/largedisk/syncthing/pictures"
 
 # Internal Field Separator set to newline, so file names with
 # spaces do not break our script.
@@ -17,6 +17,6 @@ echo $DIR/$PIC
 gsettings set org.mate.background picture-filename $DIR/$PIC
 
 # specify how long to wait in seconds between changes
-#sleep 600
+sleep 600
 
-#done
+done
