@@ -6,10 +6,10 @@ echo "===="
 
 FILESIZE=$(stat -c%s "$scfile")
 
-ORIGIONALNAME=${scfile::-34}
+ORIGINALNAME=${scfile::-34}
 extension="${scfile##*.}"
-echo $ORIGIONALNAME
-BASENAME=$ORIGIONALNAME"."$extension
+echo $ORIGINALNAME
+BASENAME=$ORIGINALNAME"."$extension
 
 BASENAMESIZE=$(stat -c%s "$BASENAME")
 echo "SYNC CONF SIZE +$FILESIZE "
@@ -17,10 +17,10 @@ echo "BASNAME FILE S +$BASENAMESIZE"
 if [ "$FILESIZE" ]; then
 
 	if [ $FILESIZE -gt $BASENAMESIZE ]; then
-		echo "deleting origional"
+		echo "deleting original"
 		echo "$BASENAME"
 		mv "$BASENAME" /media/large_disk/Docs_notbackup/tobedeleted
-		#move syncconflict over origional
+		#move syncconflict over original
 		mv "$scfile" "$BASENAME"
 else
 		echo "deleting syncconfig file"
