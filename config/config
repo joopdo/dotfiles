@@ -1,237 +1,360 @@
-# Constants
-  set $mod mod4
-
-# Number of pixels to resize by in resize mode.
-  set $resize     5
-
-  #set $base00 #101218
-  #set $base01 #1f222d
-  #set $base02 #252936
-  #set $base03 #7780a1
-  #set $base04 #C0C5CE
-  #set $base05 #d1d4e0
-  #set $base06 #C9CCDB
-  #set $base07 #ffffff
-  #set $base08 #ee829f
-  #set $base09 #f99170
-  #set $base0A #ffefcc
-  #set $base0B #a5ffe1
-  #set $base0C #97e0ff
-  #set $base0D #97bbf7
-  #set $base0E #c0b7f9
-  #set $base0F #fcc09e
-
-  set $workspace1 "1:"
-  set $workspace2 "2:"
-  set $workspace3 "3: "
-  set $workspace4 "4:"
-  set $workspace5 "5:&#xf019;"
-  set $workspace6 "6:"
-  set $workspace7 "7:"
-  set $workspace8 "8:"
-  set $workspace9 "9:"
-  set $workspace10 "0:"
-
-  #set $monitor1 "DVI-I-2"
-  #set $monitor2 "DVI-I-3"
-
-# General Configuration
-  font pango:System Noto Sans 12
-  floating_modifier $mod
-  hide_edge_borders both
-  new_window none
-  smart_borders on
-  gaps inner 10
-  gaps outer 15
-  new_float	pixel 	5
-  new_window  pixel 	5
-
-
-# Scratchpad
-bindsym $mod+Shift+minus move scratchpad
-bindsym $mod+minus scratchpad show
-
-# Change focus
- # focus_follows_mouse no
-focus_follows_mouse true
-popup_during_fullscreen smart
+# Default config for sway
 #
+# Copy this to ~/.config/sway/config and edit it to your liking.
 #
-# Window-Related Bindings
-  bindsym $mod+q kill
-#bindsym $mod+d exec dmenu
-bindsym $mod+shift+d exec passmenu 
- bindsym $mod+h focus left
-  bindsym $mod+j focus down
-  bindsym $mod+k focus up
-  bindsym $mod+l focus right
-# Alternatively, you can use the cursor keys:
- bindsym $mod+Left focus left
- bindsym $mod+Down focus down
- bindsym $mod+Up focus up
- bindsym $mod+Right focus right
+# Read `man 5 sway` for a complete reference.
 
-  bindsym $mod+Shift+h move left
-  bindsym $mod+Shift+j move down
-  bindsym $mod+Shift+k move up
-  bindsym $mod+Shift+l move right
-# Alternatively, you can use the cursor keys:
- bindsym $mod+Shift+Left focus left
- bindsym $mod+Shift+Down focus down
- bindsym $mod+Shift+Up focus up
- bindsym $mod+Shift+Right focus right
- 
+### Variables
+#
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+# Your preferred terminal emulator
+set $term emacsclient -c -n -e '(switch-to-buffer nil)'
 
+# Your preferred application launcher
+set $menu dmenu_run
+set $menu_pass passmenu
+set $browser qutebrowser --backend webengine --enable-webengine-inspector
+
+
+# APPEARANCE SETTINGS
+font pango:Roboto Regular 11
+
+# ASAKUSA THEME
+
+# set color variables
+# optional theme colorscheme
+set $grey                #334455
+set $magenta             #ddbbcc
+set $blue                #557788
+set $cyan                #22ddcc
+set $black               #334455
+set $white               #aacccc
+set $yellow              #dd9933
+set $red                 #aa5566
+set $green               #779988
+
+# theme colors
+set $bg-color 	         #334455
+set $inactive-bg-color   #334455
+set $text-color          #aacccc
+set $inactive-text-color #557788
+set $urgent-bg-color     #ee3355
+
+# set window colors
+# class                 border              background         text                 indicator
+client.focused          $bg-color           $bg-color          $white               $bg-color
+client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color $bg-color
+client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color $bg-color
+client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          $bg-color
+client.background       $bg-color
+
+# pixel borders remove title bars completely because of compton shadows
+for_window [class="^.*"] border pixel 5
+
+# set desktop background
+exec --no-startup-id feh --bg-fill ~/.wallpaper.jpg
+
+# shadows and transitions with compton
+exec --no-startup-id compton -cCGfF -b -i 0.75 --vsync glx
+
+#compton --config ~/.config/compton.conf -b
+
+# i3-gaps
+# smart_borders on      # borders only if more than one container in the workspace
+# smart_gaps on         # gaps only if more than one container in the workspace
+#O:wq
+#
+#gaps inner 15           # global gap size
+#Gaps
+for_window [class="^.*"] border pixel 3
+hide_edge_borders both
+gaps outer 2
+gaps inner 5
+### Output configuration
+#
+# Default wallpaper (more resolutions are available in /usr/share/sway/)
+#output * bg /usr/share/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+#
+# Example configuration:
+#
+#   output HDMI-A-1 resolution 1920x1080 position 1920,0
+#
+# You can get the names of your outputs by running: swaymsg -t get_outputs
+
+### Input configuration
+#
+# Example configuration:
+#
+#   input "2:14:SynPS/2_Synaptics_TouchPad" {
+#       dwt enabled
+#       tap enabled
+#       natural_scroll enabled
+#       middle_emulation enabled
+#   }
+#
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# The escape symbol "\" has to be removed.
+# Read `man 5 sway-input` for more information about this section.
+
+### Key bindings
+#
+# Basics:
+#
+    # start a terminal
+    bindsym $mod+Return exec $term
+    # start browser
+    bindsym Shift+$mod+Return exec $browser
+    # kill focused window
+    bindsym $mod+Shift+q kill
+
+    # start your launcher
+    bindsym $mod+d exec $menu
+    bindsym $mod+Shift+d exec $menu_pass
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    #floating_modifier $mod normal
+
+    # reload the configuration file
+    bindsym $mod+Shift+c reload
+
+    # exit sway (logs you out of your wayland session)
+    bindsym $mod+Shift+e exit
+    bindsym $mod+Shift+s exec ~/.dotfiles/scripts/configure-xrandr.sh ; exec ~/.dotfiles/scripts/keyboard-switch-super.sh
+#
+# Moving around:
+#
+    # Move your focus around
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+    # or use $mod+[up|down|left|right]
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+
+    # _move_ the focused window with the same, but add Shift
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+    # ditto, with arrow keys
+    bindsym $mod+Shift+Left move left
+    bindsym $mod+Shift+Down move down
+    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Right move right
+#
+# Workspaces:
+#
+# MANAGE WORKSPACES
+
+# name the workspaces (icons require fontawesome)
+set $tag1  "1"
+set $tag2  "2"
+set $tag3  "3"
+set $tag4  "4"
+set $tag5  "5"
+set $tag6  "6"
+set $tag7  "7"
+set $tag8  "8"
+set $tag9  "9"
+set $tag10 "10"
+
+# switch to workspace
+bindsym $mod+1 workspace $tag1
+bindsym $mod+2 workspace $tag2
+bindsym $mod+3 workspace $tag3
+bindsym $mod+4 workspace $tag4
+bindsym $mod+5 workspace $tag5
+bindsym $mod+6 workspace $tag6
+bindsym $mod+7 workspace $tag7
+bindsym $mod+8 workspace $tag8
+bindsym $mod+9 workspace $tag9
+bindsym $mod+0 workspace $tag10
+
+# next/previous workspace
+# bindsym $mod+Tab       workspace back_and_forth
+bindsym $mod+Tab         workspace next
+bindsym $mod+Shift+Tab   workspace prev
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $tag1
+bindsym $mod+Shift+2 move container to workspace $tag2
+bindsym $mod+Shift+3 move container to workspace $tag3
+bindsym $mod+Shift+4 move container to workspace $tag4
+bindsym $mod+Shift+5 move container to workspace $tag5
+bindsym $mod+Shift+6 move container to workspace $tag6
+bindsym $mod+Shift+7 move container to workspace $tag7
+bindsym $mod+Shift+8 move container to workspace $tag8
+bindsym $mod+Shift+9 move container to workspace $tag9
+bindsym $mod+Shift+0 move container to workspace $tag10
+#
+# Float
+
+
+#gaps inner 12
+#gaps outer 8
+new_window pixel 2
+new_float pixel 2
+
+
+for_window [title="Write:.*" class="Thunderbird"] floating enable
+#
+    # You can "split" the current object of your focus with
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    bindsym $mod+b split;exec notify-send 'horizontal split'
+  #  bindsym $mod+v splitv;exec notify-send 'vertical split'
+
+    # Switch the current container between different layout styles
+    #bindsym $mod+q layout stacking
+    bindsym $mod+w layout tabbed;exec notify-send 'tabbing'
+    bindsym $mod+q layout toggle split;exec notify-send 'split'
+
+    # Make the current focus fullscreen
+    bindsym $mod+f fullscreen
+
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+Shift+space floating toggle
+
+
+    # Swap focus between the tiling area and the floating area
+#    bindsym $mod+space focus mode_toggle
+
+    # move focus to the parent container
+    bindsym $mod+a focus parent;exec notify-send 'focus parent'
+
+#
+# Switching:
+#
 # Workspace back and forth (with/without active container)
  workspace_auto_back_and_forth yes
  bindsym $mod+c workspace back_and_forth;exec notify-send 'back and forth'
- bindsym $mod+Shift+c move container to workspace back_and_forth; workspace back_and_forth
+# bindsym $mod+Shift+c move container to workspace back_and_forth; workspace back_and_forth
 
-# Split in horizontal orientation
-bindsym $mod+g split h;exec notify-send 'split horizontally'
-# Split in vertical orientation
-bindsym $mod+v split v;exec notify-send 'split vertically'
 
-  bindsym $mod+Shift+space floating toggle;exec notify-send 'floating'
-  bindsym $mod+f fullscreen toggle
-# Change container layout (stacked, tabbed, toggle split)
- bindsym $mod+s layout stacking;exec notify-send 'stacking'
- bindsym $mod+w layout tabbed;exec notify-send 'tabbed'
- bindsym $mod+e layout toggle split;exec notify-send 'split'
+
 #
+# Scratchpad:
 #
- #bindsym $mod+Shift+h split h
-  bindsym $mod+space focus mode_toggle
-  bindsym $mod+r mode "  ";exec notify-send 'resize'
-  mode "  " {
-  bindsym h resize shrink width 10 px or 10 ppt
-  bindsym j resize grow height 10 px or 10 ppt
-  bindsym k resize shrink height 10 px or 10 ppt
-  bindsym l resize grow width 10 px or 10 ppt
-  bindsym Escape mode "default"
-  }
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
 
-# Restart-Related Bindings
- # bindsym $mod+Shift+c reload
-  bindsym $mod+Shift+r restart
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+Shift+minus move scratchpad
 
-# Program-Related Bindings
-  bindsym $mod+Return 	  exec mate-terminal
-bindsym shift+$mod+Return exec qutebrowser  
-bindsym $mod+b          exec firefox
-#  bindsym $mod+x          exec lxappearance
-#  bindsym $mod+a          exec atom
-#  bindsym $mod+e          exec eclipse
-#  bindsym $mod+z	        exec discord
-bindsym $mod+d exec rofijoop
-#  -show run -lines 3 -color-normal "#2a2337","#FFF","#2a2337","#fff","#2A2337" -color-window "#2a2337","#FFF","#2a2337","2a2337"
-#-show run -lines 3 -font "Noto Sans 16" -color-normal "#2a2337","#FFF","#2a2337","#FFF","#2A2337" -color-window "#2a2337","#FFF","#2a2337","FFF"
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+minus scratchpad show
+#
+# Resizing containers:
+#
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym $left resize shrink width 10 px or 10 ppt
+    bindsym $down resize grow height 10 px or 10 ppt
+    bindsym $up resize shrink height 10 px or 10 ppt
+    bindsym $right resize grow width 10 px or 10 ppt
 
-#rofi -show run -lines 3 -eh 2 -width 100 -padding 300  -opacity "80" -bw 0 -bc "#221d3b" -bg "#2a2337" -fg "#FFF" -hlbg "#80CBC4" -hlfg "#2a2337" -font "Noto Sans 18"
-#  bindsym --release Print exec imgur-screenshot
-  bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+    # ditto, with arrow keys
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
 
+    # return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+ bindsym XF86AudioRaiseVolume exec pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') +5% && pkill -SIGRTMIN+15 i3blocks
 
-
-# Volume & Media Bindings
-  bindsym XF86AudioLowerVolume exec --no-startup-id pulseaudio-ctl down
-  bindsym XF86AudioRaiseVolume exec --no-startup-id pulseaudio-ctl up
-  bindsym XF86AudioMute exec --no-startup-id pulseaudio-ctl mute
-  bindsym XF86AudioPlay exec playerctl play-pause
-  bindsym XF86AudioPause exec playerctl pause
-  bindsym XF86AudioNext exec playerctl next
-  bindsym XF86AudioPrev exec playerctl previous
-
-# Startup Programs
-  exec --no-startup-id nm-applet
-  exec --no-startup-id dunst
-  exec_always --no-startup-id feh --bg-scale ~/.wallpaper.jpg
-
-# Workspace-Related Bindings
-  bindsym $mod+1 workspace $workspace1
-  bindsym $mod+2 workspace $workspace2
-  bindsym $mod+3 workspace $workspace3
-  bindsym $mod+4 workspace $workspace4
-  bindsym $mod+5 workspace $workspace5
-  bindsym $mod+6 workspace $workspace6
-  bindsym $mod+7 workspace $workspace7
-  bindsym $mod+8 workspace $workspace8
-  bindsym $mod+9 workspace $workspace9
-  bindsym $mod+0 workspace $workspace10
-
-  #bindsym $mod+. workspace next|prev|next_on_output|prev_on_output
-
-  bindsym $mod+Shift+1 move container to workspace $workspace1
-  bindsym $mod+Shift+2 move container to workspace $workspace2
-  bindsym $mod+Shift+3 move container to workspace $workspace3
-  bindsym $mod+Shift+4 move container to workspace $workspace4
-  bindsym $mod+Shift+5 move container to workspace $workspace5
-  bindsym $mod+Shift+6 move container to workspace $workspace6
-  bindsym $mod+Shift+7 move container to workspace $workspace7
-  bindsym $mod+Shift+8 move container to workspace $workspace8
-  bindsym $mod+Shift+9 move container to workspace $workspace9
-  bindsym $mod+Shift+0 move container to workspace $workspace10
-
-# Workspace Monitors
-  workspace $workspace1 output $monitor1
-  workspace $workspace2 output $monitor1
-  workspace $workspace3 output $monitor1
-  workspace $workspace4 output $monitor1
-  workspace $workspace5 output $monitor1
-  workspace $workspace6 output $monitor1
-  workspace $workspace9 output $monitor1
-  workspace $workspace10 output $monitor1
-
-# Program Workspaces
-  assign [class="Thunderbird"] $workspace1
-  assign [class="Firefox"] $workspace2
-  assign [class="qutebrowser"] $workspace2
-  assign [class="Caja"] $workspace4
-  assign [class="Atom"] $workspace3
-  assign [class="Eclipse"] $workspace3
-  assign [class="libreoffice*"] $workspace6
-
-# Floating
-  for_window [class="Lxappearance"] floating enable
-  for_window [class="Seahorse"] floating enable
-  for_window [class="Pavucontrol"] floating enable
-
-# Window colours:
-
-   client.focused              #382449 #6A248D #ebdbb2 #12fee7
-   client.focused_inactive     #382449 #382449 #ebdbb2 #382449
-   client.unfocused            #382449 #382449 #ebdbb2 #382449
-   client.urgent               #bf616a #bf616a #ee0000 #bf616a
+ bindsym XF86AudioLowerVolume exec pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') -5% && pkill -SIGRTMIN+15 i3blocks
+# bindsym XF86AudioToggle exec pactl set-sink-mute $(pacmd list-sinks |awk '/* index:/{print $3}') toggl && pkill -SIGRTMIN+15 i3blocks
+ bindsym XF86MonBrightnessDown exec dsplight down 5 && pkill -SIGRTMIN+15 i3blocks
+ bindsym XF86MonBrightnessUp exec dsplight up 5 && pkill -SIGRTMIN+15 i3blocks
+ bindsym $mod+v exec /home/joop/.vim-anywhere/bin/run;exec notify-send 'VIM everywhere!'
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
 
 
-#Bar  
-  bar {
-    strip_workspace_numbers no
-    position top
-    height 30
-    status_command i3blocks -c ~/.config/i3/i3blocks.conf
-    separator_symbol "|"
-    #tray_output none
-    font pango: Noto Sans, FontAwesome Regular 11
-  colors {
-    background #2a2337
-    statusline #ffffff
-    separator #ffffff
-    focused_workspace 	#12fee7 	#12fee7 	#000000
-    active_workspace 	#12fee7 	#221d3b 	#ffffff
-    inactive_workspace 	#221d3b 	#221d3b 	#ffffff
-    urgent_workspace 	#bf616a 	#65737e 	#ffffff
-    }
-   }
- exec --no-startup-id mate-power-manager
- exec --no-startup-id mate-volume-control-applet
- #exec --no-startup-id xflux -l 30.658602 -g 104.064857
- exec --no-startup-id /usr/lib/mate-user-share/mate-user-share
- exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
- exec --no-startup-id start-pulseaudio-x11
- exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
- exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=ssh
- exec --no-startup-id xmodmap /home/joop/.Xmodmap
- exec --no-startup-id xcalib  /usr/share/ICC/Color\ LCD-933C106C-08BC-09AA-F750-C2A74A119DEF.icc
-#exec --no-startup-id compton 
-exec --no-startupid /usr/lib/mate-settings-daemon/mate-settings-daemon
+ bar {
+        # start using custom config file (full path)
+        status_command       i3pystatus -c /home/joop/.config/i3pystatus.conf
+       tray_padding         3
+      font pango:Roboto    9
+# 
+ 	colors {
+ 		# whole color settings
+ 		background   $black
+ 		statusline   $white
+ 		separator    $grey
+ 
+# 		# type             border      backgr.     font
+ 		focused_workspace  $grey       $white      $black
+ 		active_workspace   $grey       $white      $black
+ 		inactive_workspace $grey       $black      $white
+ 		urgent_workspace   $valencia   $valencia   $black
+ 	}
+position top
+ #        
+        # height of the bar in pixels
+       height 15
+}
+
+
+
+## Assign
+#assign [class="Thunderbird"] $tag4
+#assign [class="Emacs"] $tag3
+#assign [class="QQ.exe"] $tag6
+assign [class="Wine"] $tag6
+
+for_window [class="Wine"] floating enable
+
+for_window [class="Feh"] fullscreen
+
+## EXEC
+
+#exec setxkbmap -v us -variant colemak -option "caps:backspace, altwin:swap_alt_win" 
+#exec feh --bg-center ~/.wallpaper.jpg
+#exec DISPLAY=:0.0 feh --bg-scale /home/joop/.wallpaper.jpg
+exec /usr/bin/xflux xflux -l 30.6666667 -g 104.0666667
+
+
+
+
+
+
+
+exec --no-startup-id dunst &
+exec --no-startup-id compton -cCGfF -b -i 0.75 --vsync opengl --xrender-sync-fence --xrender-sync --xrender-sync-fence --opacity-rule ["100:class_g = 'kodi'" ]
+exec --no-startup-id ~/.dotfiles/scripts/keyboard-switch-super.sh
+#exec /usr/bin/thunderbird
+exec --no-startup-id /usr/bin/sh /home/joop/.xinitrc
+#exec --no-startup-id /usr/bin/mate-terminal -e tasksh
+exec  --no-startup-id /usr/bin/xmodmap /home/joop/.Xmodmap 
+exec  --no-startup-id /usr/bin/ss-local -c /etc/shadowsocks.json
+#exec /usr/bin/qutebrowser --backend webengine https://3.basecamp.com/3403132/buckets/3488696/vaults/488884715
+exec --no-startup-id ~/.dotfiles/scripts/setvariables.sh
+#exec /usr/bin/qutebrowser --backend webengine https://drpanda.atlassian.net/secure/RapidBoard.jspa?rapidView=26&quickFilter=227&quickFilter=203
+exec  --no-startup-id /usr/bin/kcptun-client -c /etc/kcptun.json
+exec  --no-startup-id dnscrypt-proxy /etc/dnscrypt-proxy.conf
+exec --no-startup-id /home/joop/.dotfiles/scripts/configure-xrandr.sh
+exec --no-startup-id emacs
+exec --no-startup-id /usr/bin/recoll
