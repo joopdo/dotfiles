@@ -14,7 +14,8 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term emacsclient -c -n -e '(switch-to-buffer nil)'
+set $term mate-terminal
+#emacsclient -c -n -e '(switch-to-buffer nil)'
 
 # Your preferred application launcher
 set $menu dmenu_run
@@ -40,7 +41,7 @@ set $red                 #aa5566
 set $green               #779988
 
 # theme colors
-set $bg-color 	         #334455
+set $bg-color 	         #232D32
 set $inactive-bg-color   #334455
 set $text-color          #aacccc
 set $inactive-text-color #557788
@@ -294,8 +295,10 @@ bindsym $mod+r mode "resize"
 
 
  bar {
+
         # start using custom config file (full path)
-        status_command       i3pystatus -c /home/joop/.config/i3pystatus.conf
+    status_command       proxychains i3pystatus -c /home/joop/.config/i3pystatus.conf
+	
        tray_padding         3
       font pango:Roboto    9
 # 
@@ -304,7 +307,7 @@ bindsym $mod+r mode "resize"
  		background   $black
  		statusline   $white
  		separator    $grey
- 
+# 
 # 		# type             border      backgr.     font
  		focused_workspace  $grey       $white      $black
  		active_workspace   $grey       $white      $black
@@ -312,11 +315,15 @@ bindsym $mod+r mode "resize"
  		urgent_workspace   $valencia   $valencia   $black
  	}
 position top
- #        
+# #        
         # height of the bar in pixels
        height 15
 }
 
+#bar {
+#        status_command i3status -c .config/i3status/config/i3status.conf
+#font pango:Roboto    9
+#}
 
 
 ## Assign
@@ -349,7 +356,7 @@ exec --no-startup-id ~/.dotfiles/scripts/keyboard-switch-super.sh
 exec --no-startup-id /usr/bin/sh /home/joop/.xinitrc
 #exec --no-startup-id /usr/bin/mate-terminal -e tasksh
 exec  --no-startup-id /usr/bin/xmodmap /home/joop/.Xmodmap 
-exec  --no-startup-id /usr/bin/ss-local -c /etc/shadowsocks.json
+exec  --no-startup-id /usr/bin/ss-local -u -c /etc/shadowsocks.json
 #exec /usr/bin/qutebrowser --backend webengine https://3.basecamp.com/3403132/buckets/3488696/vaults/488884715
 exec --no-startup-id ~/.dotfiles/scripts/setvariables.sh
 #exec /usr/bin/qutebrowser --backend webengine https://drpanda.atlassian.net/secure/RapidBoard.jspa?rapidView=26&quickFilter=227&quickFilter=203
@@ -358,3 +365,7 @@ exec  --no-startup-id dnscrypt-proxy /etc/dnscrypt-proxy.conf
 exec --no-startup-id /home/joop/.dotfiles/scripts/configure-xrandr.sh
 exec --no-startup-id emacs
 exec --no-startup-id /usr/bin/recoll
+#exec --no-startup-id xfce4-panel --disable-wm-check
+exec --no-startup-id /usr/bin/proxychains /usr/bin/signal-desktop
+exec --no-startup-id /usr/bin/electronic-wechat
+
