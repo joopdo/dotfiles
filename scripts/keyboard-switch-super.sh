@@ -1,6 +1,6 @@
 #!/bin/bash
-setxkbmap -v us -variant colemak -option "caps:backspace, altwin:swap_alt_win"
-localectl set-x11-keymap colemak
+setxkbmap -v us -variant 'colemak' -option "caps:backspace, altwin:swap_alt_win"
+localectl set-x11-keymap 'colemak'
 #setxkbmap -option caps:escape &
 
 #	#setxkbmap -v us -variant colemak -option "caps:backspace"
@@ -15,7 +15,7 @@ then
 #setxkbmap -device 13 -v us -variant colemak -option
 
 echo $ID
-setxkbmap -device "$ID" -v us -variant colemak -option
+setxkbmap -device "$ID" -v us -variant 'colemak' -option
 
 #"caps:backspace, altwin:swap_alt_win"
 #		echo	setxkbmap -device "{$ID}" -keymap colemak -option altwin:swap_alt_win

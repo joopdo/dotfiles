@@ -1,4 +1,4 @@
-# Default config for sway
+# Default config for swa
 #
 # Copy this to ~/.config/sway/config and edit it to your liking.
 #
@@ -14,7 +14,8 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term mate-terminal
+#set $term /usr/bin/alacritty
+set $term /usr/bin/mate-terminal
 #emacsclient -c -n -e '(switch-to-buffer nil)'
 
 # Your preferred application launcher
@@ -49,7 +50,7 @@ set $urgent-bg-color     #ee3355
 
 # set window colors
 # class                 border              background         text                 indicator
-client.focused          $bg-color           $bg-color          $white               $bg-color
+client.focused          $bg-color           $white          $white               $bg-color
 client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color $bg-color
 client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color $bg-color
 client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          $bg-color
@@ -129,7 +130,7 @@ gaps inner 5
 
     # exit sway (logs you out of your wayland session)
     bindsym $mod+Shift+e exit
-    bindsym $mod+Shift+s exec ~/.dotfiles/scripts/configure-xrandr.sh ; exec ~/.dotfiles/scripts/keyboard-switch-super.sh
+    bindsym $mod+Shift+s exec ~/.dotfiles/scripts/configure-xrandr.sh ; exec ~/.dotfiles/scripts/keyboard-switch-super.sh; exec feh --bg-fill ~/.wallpaper.jpg  
 #
 # Moving around:
 #
@@ -223,7 +224,7 @@ for_window [title="Write:.*" class="Thunderbird"] floating enable
     bindsym $mod+q layout toggle split;exec notify-send 'split'
 
     # Make the current focus fullscreen
-    bindsym $mod+f fullscreen
+    bindsym $mod+f fullscreen; exec feh --bg-fill ~/.wallpaper.jpg  
 
     # Toggle the current focus between tiling and floating mode
     bindsym $mod+Shift+space floating toggle
@@ -287,7 +288,8 @@ bindsym $mod+r mode "resize"
 # bindsym XF86AudioToggle exec pactl set-sink-mute $(pacmd list-sinks |awk '/* index:/{print $3}') toggl && pkill -SIGRTMIN+15 i3blocks
  bindsym XF86MonBrightnessDown exec dsplight down 5 && pkill -SIGRTMIN+15 i3blocks
  bindsym XF86MonBrightnessUp exec dsplight up 5 && pkill -SIGRTMIN+15 i3blocks
- bindsym $mod+v exec /home/joop/.vim-anywhere/bin/run;exec notify-send 'VIM everywhere!'
+# bindsym $mod+v exec /home/joop/.vim-anywhere/bin/run;exec notify-send 'VIM everywhere!'
+
 #
 # Status Bar:
 #
@@ -297,7 +299,7 @@ bindsym $mod+r mode "resize"
  bar {
 
         # start using custom config file (full path)
-    status_command       proxychains i3pystatus -c /home/joop/.config/i3pystatus.conf
+    status_command       proxychains i3pystatus -c /home/joop/.config/i3pystatus.conf | lolcat
 	
        tray_padding         3
       font pango:Roboto    9
@@ -350,7 +352,7 @@ exec /usr/bin/xflux xflux -l 30.6666667 -g 104.0666667
 
 
 exec --no-startup-id dunst &
-exec --no-startup-id compton -cCGfF -b -i 0.75 --vsync opengl --xrender-sync-fence --xrender-sync --xrender-sync-fence --opacity-rule ["100:class_g = 'kodi'" ]
+exec --no-startup-id compton -cCGfF -b -i 0.95 --vsync opengl --xrender-sync-fence --xrender-sync --xrender-sync-fence
 exec --no-startup-id ~/.dotfiles/scripts/keyboard-switch-super.sh
 #exec /usr/bin/thunderbird
 exec --no-startup-id /usr/bin/sh /home/joop/.xinitrc
@@ -363,9 +365,11 @@ exec --no-startup-id ~/.dotfiles/scripts/setvariables.sh
 exec  --no-startup-id /usr/bin/kcptun-client -c /etc/kcptun.json
 exec  --no-startup-id dnscrypt-proxy /etc/dnscrypt-proxy.conf
 exec --no-startup-id /home/joop/.dotfiles/scripts/configure-xrandr.sh
-exec --no-startup-id emacs
-exec --no-startup-id /usr/bin/recoll
+#exec --no-startup-id emacs
+exec --no-startup-id /opt/squashfs-root/dingtalk
+#exec --no-startup-id /usr/bin/recoll
 #exec --no-startup-id xfce4-panel --disable-wm-check
 exec --no-startup-id /usr/bin/proxychains /usr/bin/signal-desktop
-exec --no-startup-id /usr/bin/electronic-wechat
+#exec --no-startup-id /usr/bin/electronic-wechat
+exec --no-startup-id /usr/bin/emacs --daemon
 
