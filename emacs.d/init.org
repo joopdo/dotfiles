@@ -1,0 +1,104 @@
+* General configuration
+
+** General config
+
+*** Backups
+
+This is one of the things people usually want to change right away. By default, Emacs saves backup files in the current directory. These are the files ending in =~= that are cluttering up your directory lists. The following code stashes them all in =~/.emacs.d/backups=, where I can find them with =C-x C-f= (=find-file=) if I really need to.
+
+#+BEGIN_SRC emacs-lisp 
+(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
+#+END_SRC
+
+Disk space is cheap. Save lots.
+#+BEGIN_SRC emacs-lisp 
+(setq delete-old-versions -1)
+(setq version-control t)
+(setq vc-make-backup-files t)
+(setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
+#+END_SRC
+
+
+*** Remove toolbar
+#+BEGIN_SRC emacs-lisp 
+(tool-bar-mode -1)
+#+END_SRC
+
+
+*** Change "yes or no" to "y or n"
+
+Lazy people like me never want to type "yes" when "y" will suffice.
+
+#+BEGIN_SRC emacs-lisp 
+(fset 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+*** Visual line mode
+Also, =visual-line-mode= is so much better than =auto-fill-mode=. It doesn't actually break the text into multiple lines - it only looks that way.
+
+#+BEGIN_SRC emacs-lisp 
+(remove-hook 'text-mode-hook #'turn-on-auto-fill)
+(add-hook 'text-mode-hook 'turn-on-visual-line-mode)
+#+END_SRC
+** org-bullets
+Starting org-bullets here.
+#+begin_src emacs-lisp
+
+(require 'org-bullets)
+(use-package org-bullets
+    :hook (org-mode . org-bullets-mode))
+#+end_src
+
+
+** Spellcheckers
+
+#+begin_src emacs-lisp
+;; find aspell and hunspell automatically
+(cond
+ ;; try hunspell at first
+  ;; if hunspell does NOT exist, use aspell
+ ((executable-find "hunspell")
+  (setq ispell-program-name "hunspell")
+  (setq ispell-local-dictionary "en_US")
+  (setq ispell-local-dictionary-alist
+        ;; Please note the list `("-d" "en_US")` contains ACTUAL parameters passed to hunspell
+        ;; You could use `("-d" "en_US,en_US-med")` to check with multiple dictionaries
+        '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8)
+          )))
+
+ ((executable-find "aspell")
+  (setq ispell-program-name "aspell")
+  ;; Please note ispell-extra-args contains ACTUAL parameters passed to aspell
+  (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US"))))
+
+;(require 'langtool)
+
+(setq langtool-java-classpath
+        "/usr/share/languagetool:/usr/share/java/languagetool/*")
+(setq langtool-language-tool-jar "/usr/share/java/languagetool/languagetool-commandline.jar")
+(setq langtool-java-bin "/usr/bin/java")
+
+(add-hook 'org-mode-hook 'turn-on-flyspell)
+(add-hook 'after-save-hook 'langtool-check nil t)
+#+end_src
+
+* Look and feel
+
+** Theme
+I use a custom theme called Ayu.
+
+#+begin_src emacs-lisp
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+ '(custom-enabled-themes (quote (ayu)))
+(load-theme 'ayu t)
+#+end_src
+
+* Loading the main plugins
+** Evil
+Let's load VIM keybindings.
+
+#+begin_src emacs-lisp
+(add-to-list 'load-path "~/.emacs.d/evil")
+(require 'evil)
+(evil-mode 1)
+#+end_src
+

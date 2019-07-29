@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-PRIMARY="eDP1"
+PRIMARY="LVDS1"
 EXT1="HDMI1"
 EXT2="VGA-0"
 

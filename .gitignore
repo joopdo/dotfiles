@@ -1,0 +1,6 @@
+#don't commit auto save lists
+emacs.d/auto-save-list/
+emacs.d/backups/
+
+#no need for elpa either
+emacs.d/elpa/
