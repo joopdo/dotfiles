@@ -1,7 +1,6 @@
 * General configuration
 
 ** General config
-
 *** Backups
 
 This is one of the things people usually want to change right away. By default, Emacs saves backup files in the current directory. These are the files ending in =~= that are cluttering up your directory lists. The following code stashes them all in =~/.emacs.d/backups=, where I can find them with =C-x C-f= (=find-file=) if I really need to.
@@ -18,12 +17,10 @@ Disk space is cheap. Save lots.
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
 #+END_SRC
 
-
 *** Remove toolbar
 #+BEGIN_SRC emacs-lisp 
 (tool-bar-mode -1)
 #+END_SRC
-
 
 *** Change "yes or no" to "y or n"
 
@@ -47,7 +44,6 @@ Starting org-bullets here.
 (use-package org-bullets
     :hook (org-mode . org-bullets-mode))
 #+end_src
-
 
 ** Spellcheckers
 
@@ -81,8 +77,26 @@ Starting org-bullets here.
 (add-hook 'after-save-hook 'langtool-check nil t)
 #+end_src
 
-* Look and feel
+** Babel
+active Babel languages
+#+begin_src emacs-lisp
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((shell . t)
+ (python . t)
+   (emacs-lisp . t)))
+#+end_src
 
+And we don't want Babel to ask for confirmation each time we execute code.
+
+#+begin_src emacs-lisp
+(defun my-org-confirm-babel-evaluate (lang body)
+  (not (member lang '("shell" "python" "emacs-lisp"))))
+
+(setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
+#+end_src
+
+* Look and feel
 ** Theme
 I use a custom theme called Ayu.
 

@@ -44,6 +44,17 @@
 (add-hook 'org-mode-hook 'turn-on-flyspell)
 (add-hook 'after-save-hook 'langtool-check nil t)
 
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((shell . t)
+ (python . t)
+   (emacs-lisp . t)))
+
+(defun my-org-confirm-babel-evaluate (lang body)
+  (not (member lang '("shell" "python" "emacs-lisp"))))
+
+(setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
+
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
  '(custom-enabled-themes (quote (ayu)))
 (load-theme 'ayu t)
