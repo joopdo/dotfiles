@@ -1,9 +1,9 @@
 # Script to randomly set Background from files in a directory
 
 while true;do
-cd "/home/suna/datalarge/pictures"
+cd "/home/suna/Pictures"
 # Directory Containing Pictures -- EDIT THIS LINE 
-DIR="/home/suna/datalarge/pictures"
+DIR="/home/suna/Pictures"
 
 # Internal Field Separator set to newline, so file names with
 # spaces do not break our script.

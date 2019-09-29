@@ -299,7 +299,8 @@ bindsym $mod+r mode "resize"
  bar {
 
         # start using custom config file (full path)
-    status_command       proxychains i3pystatus -c /home/joop/.config/i3pystatus.conf | lolcat
+
+    status_command      i3pystatus -c /home/suna/.config/i3pystatus.conf
 	
        tray_padding         3
       font pango:Roboto    9
