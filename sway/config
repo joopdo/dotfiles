@@ -20,7 +20,7 @@ set $term /usr/bin/mate-terminal
 #emacsclient -c -n -e '(switch-to-buffer nil)'
 
 # Your preferred application launcher
-set $menu dmenu_run
+set $menu i3-dmenu-desktop
 set $menu_pass passmenu
 set $browser qutebrowser --backend webengine --enable-webengine-inspector
 
@@ -288,8 +288,8 @@ bindsym $mod+r mode "resize"
 
  bindsym XF86AudioLowerVolume exec pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') -5% && pkill -SIGRTMIN+15 i3blocks
 # bindsym XF86AudioToggle exec pactl set-sink-mute $(pacmd list-sinks |awk '/* index:/{print $3}') toggl && pkill -SIGRTMIN+15 i3blocks
- bindsym XF86MonBrightnessDown exec dsplight down 5 && pkill -SIGRTMIN+15 i3blocks
- bindsym XF86MonBrightnessUp exec dsplight up 5 && pkill -SIGRTMIN+15 i3blocks
+ bindsym XF86MonBrightnessDown exec light -U 5 
+ bindsym XF86MonBrightnessUp exec light -A 5 
 # bindsym $mod+v exec /home/joop/.vim-anywhere/bin/run;exec notify-send 'VIM everywhere!'
 
 #
