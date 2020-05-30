@@ -12,10 +12,10 @@ IFS='
 
 # Command to Select a random jpg file from directory
 PIC=$(find . -size +1M -print | grep -i '.*[.]jpg' | shuf -n1)
-echo $DIR/$PIC
+echo "$DIR/$PIC"
 PPATH="file://$DIR/$PIC"
 # Command to set Background Image
-gsettings set org.mate.background picture-filename $DIR/$PIC
+gsettings set org.mate.background picture-filename "$DIR/$PIC"
 #gsettings set com.deepin.wrap.gnome.desktop.background picture-uri "$PPATH"
 # specify how long to wait in seconds between changes
 sleep 6000

@@ -1,7 +1,7 @@
 [Desktop Entry]
-Name=Open wallpaper
-TryExec=/home/suna/.dotfiles/scripts/deepin-eom.sh
-Exec=/home/suna/.dotfiles/scripts/deepin-eom.sh
+Name=Open wallpaper (Mate)
+TryExec=/home/suna/.dotfiles/scripts/open-mate.sh
+Exec=/home/suna/.dotfiles/scripts/open-mate.sh
 Icon=eom
 StartupNotify=true
 Terminal=false
