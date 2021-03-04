@@ -91,3 +91,17 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Amazon Ember Mono" :foundry "DAMA" :slant normal :weight normal :height 113 :width normal)))))
+
+(defun del-binary_characters (beg end)
+  "Delete binary characters in a region"
+  (interactive "r")
+  (save-excursion
+    (save-restriction
+      (narrow-to-region beg end)
+      (goto-char (point-min))
+      (while (re-search-forward "[^[:ascii:]]" nil t)
+        (replace-match "")))))
+
+(add-hook 'org-mode-hook
+          (lambda ()
+        (define-key evil-normal-state-map (kbd "TAB") 'org-cycle)))

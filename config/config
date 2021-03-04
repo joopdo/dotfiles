@@ -4,6 +4,7 @@
 
 ## Mod key. Use Mod1 for Alt, Mod4 for Super key.
 set $mod Mod4
+set $mod2 Mod1
 set $left h
 set $down j
 set $up k
@@ -15,7 +16,7 @@ set $term /usr/bin/gnome-terminal
 ## Your preferred application launcher
 set $menu i3-dmenu-desktop
 set $menu_pass passmenu
-set $browser Firefox
+set $browser chromium-browser --app=https://this-page-intentionally-left-blank.org/
 
 # APPEARANCE SETTINGS
 
@@ -45,7 +46,7 @@ set $browser Firefox
    # pixel borders remove title bars completely because of compton shadows
    for_window [title="Write:.*" class="(?i)Evolution"] floating enable
    for_window [class="(?i)Chrome"] move container to workspace $tag1
-   for_window [class="(?i)Evolution"] move container to workspace $tag1
+#   for_window [class="(?i)Evolution"] move container to workspace $tag2
    for_window [class="^.*"] border pixel 5
    for_window [class="Feh"] fullscreen
 
@@ -169,7 +170,7 @@ set $browser Firefox
     bindsym $mod+f fullscreen; exec feh --bg-fill ~/.wallpaper.jpg  
 
     # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle
+    bindsym $mod2+Shift+space floating toggle; exec notify-send 'floating'
 
     # move focus to the parent container
     bindsym $mod+a focus parent;exec notify-send 'focus parent'
@@ -214,10 +215,13 @@ set $browser Firefox
 # Make the volume buttons work
 #
 
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') +5% && pkill -SIGRTMIN+15 i3blocks
- bindsym XF86AudioLowerVolume exec pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') -5% && pkill -SIGRTMIN+15 i3blocks
- bindsym XF86MonBrightnessDown exec dsplight down 5 && pkill -SIGRTMIN+15 i3blocks
- bindsym XF86MonBrightnessUp exec dsplight up 5 && pkill -SIGRTMIN+15 i3blocks
+bindsym XF86AudioRaiseVolume exec "amixer  -q sset Master,0 5+ unmute"
+
+#pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') +5% && pkill -SIGRTMIN+15 i3blocks
+bindsym XF86AudioLowerVolume exec "amixer  -q sset Master,0 5- unmute"
+#pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') -5% && pkill -SIGRTMIN+15 i3blocks
+ bindsym XF86MonBrightnessDown exec xbacklight -inc 10 && pkill -SIGRTMIN+15 i3blocks
+ bindsym XF86MonBrightnessUp exec xbacklight -dec 10 && pkill -SIGRTMIN+15 i3blocks
 
 #
 # Status Bar:
@@ -250,19 +254,25 @@ position top
 
     exec --no-startup-id dunst
     exec --no-startup-id feh --bg-fill ~/.wallpaper.jpg
-    exec --no-startup-id compton -cCGfF -b -i 0.75 --vsync glx
+#    exec --no-startup-id  compton -cCGfF -b -i 0.95 -I 200 -O 200  
     exec --no-startup-id nm-applet
     exec --no-startup-id ~/.dotfiles/scripts/keyboard-switch-super.sh
     exec --no-startup-id /usr/bin/sh /home/joop/.xinitrc
     exec --no-startup-id /usr/bin/xmodmap /home/joop/.Xmodmap 
     exec --no-startup-id /usr/bin/sh /home/ANT.AMAZON.COM/joopd/.dotfiles/scripts/configure-xrandr.sh
     exec --no-startup-id /usr/lib/gsd-xsettings
-    exec --no-startup-id gnome-power-manager
+#    exec --no-startup-id /usr/bin/flatpak run --branch=stable --arch=x86_64 --command=barrier com.github.debauchee.barrier
+ 
+#    exec --no-startup-id gnome-power-manager
     exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
     exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
     exec --no-startup-id /usr/local/amazon/sbin/acmed-session.sh
+    exec --no-startup-id /usr/bin/indicator-cpufreq
     exec --no-startup-id /usr/bin/user-hooks
-    exec --no-startup-id /usr/bin/google-chrome --app=https://app.chime.aws/  
+    exec --no-startup-id /usr/bin/chromium-browser --app=https://app.chime.aws/  
+    exec --no-startup-id /usr/bin/chromium-browser --app=https://booking.workplace.com/
+    exec --no-startup-id /usr/bin/chromium-browser --app=https://app.slack.com/client/T016M3G1GHZ/threads  
     exec --no-startup-id /usr/bin/redshift 0.6
-    exec --no-startup-id ~/.dotfiles/scripts/configure-xrandr.sh
+ #   exec --no-startup-id ~/.dotfiles/scripts/configure-xrandr.sh
     exec --no-startup-id java -cp /opt/LanguageTool-4.9/languagetool-server.jar org.languagetool.server.HTTPServer --port 8081 --allow-origin "*"
+    #exec --no-startup-id /home/ANT.AMAZON.COM/joopd/.screenlayout/vertical.sh 

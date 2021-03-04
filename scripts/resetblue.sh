@@ -1,0 +1,3 @@
+rmmod btusb
+modprobe btusb
+
