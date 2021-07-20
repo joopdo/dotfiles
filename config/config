@@ -213,7 +213,7 @@ no_focus [class="plasmashell" window_type="notification"]
 bindsym F1 exec "~/.screenlayout/1screen.sh"
 bindsym F3 exec "~/.screenlayout/2screen.sh"
 bindsym F4 exec "~/.dotfiles/scripts/configure-xrandr-1.sh"
-bindsym F9 exec "/bin/sh /home/ANT.AMAZON.COM/joopd/scripts/bookingstandup.sh"
+bindsym F9 exec "/bin/sh ~/scripts/bstandup.sh"
 bindsym F10 exec "~/.dotfiles/scripts/mute.sh"
 #bindsym XF86AudioLowerVolume exec "amixer  -q sset Master,0 5- unmute"
 bindsym F5 exec "amixer -q sset Master,0 10- unmute"
@@ -261,16 +261,12 @@ position top
 #
     exec --no-startup-id dunst
     exec --no-startup-id feh --bg-fill ~/.wallpaper2.jpg
-#    exec --no-startup-id  compton --config /home/ANT.AMAZON.COM/joopd/.config/picom/picom.conf
 #cCGfF -b -i 0.95 -I 200 -O 200  
     exec --no-startup-id nm-applet
-#    exec --no-startup-id ~/.dotfiles/scripts/keyboard-switch-super.sh
     exec --no-startup-id /usr/bin/sh /home/joop/.xinitrc
     exec --no-startup-id /usr/bin/xmodmap /home/joop/.Xmodmap 
 #/home/ANT.AMAZON.COM/joopd/.dotfiles/scripts/configure-xrandr.sh
 #    exec --no-startup-id /usr/lib/gsd-xsettings
-##    exec --no-startup-id /usr/bin/flatpak run --branch=stable --arch=x86_64 --command=barrier com.github.debauchee.barrier
- 
 ##    exec --no-startup-id gnome-power-manager
 #   exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
     exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
@@ -279,31 +275,5 @@ position top
     exec --no-startup-id /usr/bin/user-hooks
     exec --no-startup-id /snap/bin/slack
     exec --no-startup-id /usr/bin/google-chrome-stable --app=https://app.chime.aws/  
-#    exec --no-startup-id /usr/bin/google-chrome-stable --app=https://app.slack.com/client/T016M3G1GHZ
-#https://app.slack.com/client/T016M3G1GHZ/G018FCX68PL?selected_team_id=E015GUGD2V6
-#https://app.slack.com/client/T016M3G1GHZ/threads/thread/G017JSWTZCP-1601477306.051100  
-#   for_window [title=".*Chime.*"] move to workspace $tag1 
-
-#    exec --no-startup-id /usr/bin/firefox https://app.chime.aws/  
- #   exec --no-startup-id /usr/bin/google-chrome-stable --app=firefox --app=https://booking.workplace.com/
-#    assign [class="Firefox" instance="Navigator"] $tag10
-#   for_window [title=".*Workplace.*"] move to workspace $tag1 
-
- #   exec --no-startup-id /usr/bin/google-chrome-stable --app=https://app.asana.com/0/1151052836368700/list
- #  exec --no-startup-id /usr/bin/workrave
- #  exec --no-statup-id /usr/bin/google-chrome-stable --app=https://nc.joop.in/apps/news 
-#   for_window [title=".*Asana.*"] move to workspace $tag10 
-
-#    assign [class="Firefox" instance="Navigator"] $tag2
-
-#    exec --no-startup-id /snap/bin/slack
-#    for_window [class="*Slack*"] move to workspace $tag1 
-#firefox https://app.slack.com/client/T016M3G1GHZ/threads  
-#    exec --no-startup-id /usr/bin/firefox https://app.slack.com/client/T016M3G1GHZ/D01AXBF3Y8G/thread/C016MML1ULB-1601892403.180700
-#    exec --no-startup-id /usr/bin/redshift 0.6
-#    exec --no-startup-id i3-workspaces
-#    exec --no-startup-id /usr/bin/davmail
- #   exec --no-startup-id ~/.dotfiles/scripts/configure-xrandr.sh
  #   exec --no-startup-id java -cp /opt/LanguageTool-5.1/languagetool-server.jar org.languagetool.server.HTTPServer --port 8081 --allow-origin "*"
-    #exec --no-startup-id /home/ANT.AMAZON.COM/joopd/.screenlayout/vertical.sh 
     exec --no-startup-id /bin/sh /home/ANT.AMAZON.COM/joopd/.screenlayout/1screen.sh
