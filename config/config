@@ -1,7 +1,4 @@
-# S3 Config of joopdo
-
-# Variables
-
+# S3 Config of joop
 ## Mod key. Use Mod1 for Alt, Mod4 for Super key.
 set $mod Mod4
 set $mod2 Mod1
@@ -9,29 +6,25 @@ set $left h
 set $down j
 set $up k
 set $right l
-
 ## Your preferred terminal emulator. I like Gnome-Terminal.
-set $term /usr/bin/gnome-terminal
-
+set $term /usr/bin/mate-terminal
+#konsole
 ## Your preferred application launcher
 set $menu i3-dmenu-desktop
 set $menu_pass passmenu
-set $browser chromium-browser --app=https://this-page-intentionally-left-blank.org/
-
+set $browser google-chrome-stable --app="https://w.amazon.com/bin/view/Users/joopd/Links/"
+#set $browser firefox https://w.amazon.com/bin/view/Users/joopd/Links --disable-breakpad --disable-component-update --disable-hang-monitor --disable-logging --disable-print-preview --disable-metrics --disable-metrics-reporting --disable-dev-tools --ssl-version-min=tl
 # APPEARANCE SETTINGS
-
    ## set color variables
    set $grey                #334455
    set $black               #334455
    set $white               #aacccc
-
    ## theme colors
    set $bg-color 	         #232D32
    set $inactive-bg-color   #334455
    set $text-color          #aacccc
    set $inactive-text-color #557788
    set $urgent-bg-color     #ee3355
-
    ## set window colors
    ### class                 border              background         text                 indicator
    client.focused           #73D216          #73D216          $white               $bg-color
@@ -39,21 +32,34 @@ set $browser chromium-browser --app=https://this-page-intentionally-left-blank.o
    client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color $bg-color
    client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          $bg-color
    client.background       $bg-color
-
 #
 # PROGRAM SPECIFIC CONFIGS
 #
    # pixel borders remove title bars completely because of compton shadows
    for_window [title="Write:.*" class="(?i)Evolution"] floating enable
-   for_window [class="(?i)Chrome"] move container to workspace $tag1
-#   for_window [class="(?i)Evolution"] move container to workspace $tag2
+   #for_window [class="(?i)Chrome"] move container to workspace $tag1
    for_window [class="^.*"] border pixel 5
    for_window [class="Feh"] fullscreen
 
+
+#
+# KDE specific
+#
+for_window [title="Desktop — Plasma"] kill; floating enable; border none
+for_window [class="plasmashell"] floating enable;
+for_window [class="Plasma"] floating enable; border none
+for_window [title="plasma-desktop"] floating enable; border none
+for_window [title="win7"] floating enable; border none
+for_window [class="krunner"] floating enable; border none
+for_window [class="Kmix"] floating enable; border none
+for_window [class="Klipper"] floating enable; border none
+for_window [class="Plasmoidviewer"] floating enable; border none
+for_window [class="(?i)*nextcloud*"] floating disable
+#for_window [class="plasmashell" window_type="notification"] floating enable, border none, move right 700px, move down 450px
+no_focus [class="plasmashell" window_type="notification"] 
 # 
 #  I3 settings
 #
-   #pixel perfect
    font pango:Roboto Regular 11
    new_float pixel 2
    new_window pixel 2
@@ -68,35 +74,25 @@ set $browser chromium-browser --app=https://this-page-intentionally-left-blank.o
     bindsym Shift+$mod+Return exec $browser
     # kill focused window
     bindsym $mod+Shift+q kill
-
     # start your launcher
     bindsym $mod+d exec $menu
     bindsym $mod+Shift+d exec $menu_pass
-
     # reload the configuration file
     bindsym $mod+Shift+c reload
-
     # exit I3/sway (logs you out of your wayland session)
     bindsym $mod+Shift+e exit
-
-    # Hotkey to set screen, wallpaper and hotplug keyboard right if session got incorrect.
-    bindsym $mod+Shift+s exec ~/.dotfiles/scripts/configure-xrandr.sh ; exec feh --bg-fill ~/.wallpaper.jpg ; exec  ~/.dotfiles/scripts/keyboard-switch-super.sh ; feh --bg-fill ~/.wallpaper.jpg     
-
     # lock the screen
     #bindsym $mod+l exec i3lock-fancy
-
     #Moving around
     bindsym $mod+$left focus left
     bindsym $mod+$down focus down
     bindsym $mod+$up focus up
     bindsym $mod+$right focus right
-
     #Moving around
     bindsym $mod+Left focus left
     bindsym $mod+Down focus down
     bindsym $mod+Up focus up
     bindsym $mod+Right focus right
-
     # Moving keys
     bindsym $mod+Shift+$left move left
     bindsym $mod+Shift+$down move down
@@ -110,11 +106,23 @@ set $browser chromium-browser --app=https://this-page-intentionally-left-blank.o
     bindsym $mod+Shift+Right move right
 #
 # Workspaces:
+   set $monitor_left HDMI-1
+   set $monitor_right DP-2
+
+   workspace $tag1 output $monitor_left
+   workspace $tag2 output $monitor_left
+   workspace $tag3 output $monitor_left
+   workspace $tag4 output $monitor_left
+   workspace $tag5 output $monitor_left
+   workspace $tag6 output $monitor_left
+   workspace $tag7 output $monitor_right
+   workspace $tag8 output $monitor_left
+   workspace $tag9 output $monitor_left
+   workspace $tag0 output $monitor_left
 #
 # MANAGE WORKSPACES
-
    # name the workspaces (icons require fontawesome)
-   set $tag1  "1"
+   set $tag1  "1: Chat"
    set $tag2  "2"
    set $tag3  "3"
    set $tag4  "4"
@@ -123,8 +131,7 @@ set $browser chromium-browser --app=https://this-page-intentionally-left-blank.o
    set $tag7  "7"
    set $tag8  "8"
    set $tag9  "9"
-   set $tag10 "10"
-
+   set $tag10 "0: Asana"
    # switch to workspace
    bindsym $mod+1 workspace $tag1
    bindsym $mod+2 workspace $tag2
@@ -132,16 +139,14 @@ set $browser chromium-browser --app=https://this-page-intentionally-left-blank.o
    bindsym $mod+4 workspace $tag4
    bindsym $mod+5 workspace $tag5
    bindsym $mod+6 workspace $tag6
-   bindsym $mod+7 workspace $tag7
+   bindsym $mod+7 workspace $tag7 
    bindsym $mod+8 workspace $tag8
    bindsym $mod+9 workspace $tag9
    bindsym $mod+0 workspace $tag10
-
    # next/previous workspace
    # bindsym $mod+Tab       workspace back_and_forth
    bindsym $mod+Tab         workspace next
    bindsym $mod+Shift+Tab   workspace prev
-
    # move focused container to workspace
    bindsym $mod+Shift+1 move container to workspace $tag1
    bindsym $mod+Shift+2 move container to workspace $tag2
@@ -153,28 +158,21 @@ set $browser chromium-browser --app=https://this-page-intentionally-left-blank.o
    bindsym $mod+Shift+8 move container to workspace $tag8
    bindsym $mod+Shift+9 move container to workspace $tag9
    bindsym $mod+Shift+0 move container to workspace $tag10
-
-#
+   
     # You can "split" the current object of your focus with
     # $mod+b or $mod+v, for horizontal and vertical splits
     # respectively.
     bindsym $mod+b split;exec notify-send 'horizontal split'
-  #  bindsym $mod+v splitv;exec notify-send 'vertical split'
-
     # Switch the current container between different layout styles
     #bindsym $mod+q layout stacking
     bindsym $mod+w layout tabbed;exec notify-send 'tabbing'
     bindsym $mod+q layout toggle split;exec notify-send 'split'
-
     # Make the current focus fullscreen
     bindsym $mod+f fullscreen; exec feh --bg-fill ~/.wallpaper.jpg  
-
     # Toggle the current focus between tiling and floating mode
     bindsym $mod2+Shift+space floating toggle; exec notify-send 'floating'
-
     # move focus to the parent container
     bindsym $mod+a focus parent;exec notify-send 'focus parent'
-
 #
 # Switching:
 #
@@ -186,7 +184,6 @@ set $browser chromium-browser --app=https://this-page-intentionally-left-blank.o
 #
     # Move the currently focused window to the scratchpad
     bindsym $mod+Shift+minus move scratchpad
-
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
@@ -198,31 +195,41 @@ set $browser chromium-browser --app=https://this-page-intentionally-left-blank.o
     bindsym $down resize grow height 10 px or 10 ppt
     bindsym $up resize shrink height 10 px or 10 ppt
     bindsym $right resize grow width 10 px or 10 ppt
-
     # ditto, with arrow keys
     bindsym Left resize shrink width 10 px or 10 ppt
     bindsym Down resize grow height 10 px or 10 ppt
     bindsym Up resize shrink height 10 px or 10 ppt
     bindsym Right resize grow width 10 px or 10 ppt
-
     # return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
     }
     bindsym $mod+r mode "resize"
-
 #
 # Make the volume buttons work
 #
 
-bindsym XF86AudioRaiseVolume exec "amixer  -q sset Master,0 5+ unmute"
-
-#pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') +5% && pkill -SIGRTMIN+15 i3blocks
-bindsym XF86AudioLowerVolume exec "amixer  -q sset Master,0 5- unmute"
-#pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') -5% && pkill -SIGRTMIN+15 i3blocks
- bindsym XF86MonBrightnessDown exec xbacklight -inc 10 && pkill -SIGRTMIN+15 i3blocks
- bindsym XF86MonBrightnessUp exec xbacklight -dec 10 && pkill -SIGRTMIN+15 i3blocks
-
+#
+bindsym F1 exec "~/.screenlayout/1screen.sh"
+bindsym F3 exec "~/.screenlayout/2screen.sh"
+bindsym F4 exec "~/.dotfiles/scripts/configure-xrandr-1.sh"
+bindsym F9 exec "/bin/sh /home/ANT.AMAZON.COM/joopd/scripts/bookingstandup.sh"
+bindsym F10 exec "~/.dotfiles/scripts/mute.sh"
+#bindsym XF86AudioLowerVolume exec "amixer  -q sset Master,0 5- unmute"
+bindsym F5 exec "amixer -q sset Master,0 10- unmute"
+#bindsym XF86AudioRaiseVolume exec "amixer  -q sset Master,0 5+ unmute"
+bindsym F6 exec "amixer -q sset Master,0 10+ unmute"
+#
+# Time for dinner!
+#
+bindsym $mod+F9 exec "systemctl suspend"
+#
+# Close the blinds!
+#
+bindsym XF86MonBrightnessDown exec xbacklight -inc 10 && pkill -SIGRTMIN+15 i3blocks
+bindsym XF86MonBrightnessUp exec xbacklight -dec 10 && pkill -SIGRTMIN+15 i3blocks
+# My 'reset' Hotkey to set screen, wallpaper and hotplug keyboard right if session got incorrect. Useful in the office when I connect my laptop to a random screen etc.
+bindsym $mod+Shift+s exec ~/.dotfiles/scripts/configure-xrandr.sh ; exec feh --bg-fill ~/.wallpaper.jpg ; exec  ~/.dotfiles/scripts/keyboard-switch-super.sh ; feh --bg-fill ~/.wallpaper.jpg     
 #
 # Status Bar:
 #
@@ -230,15 +237,17 @@ bindsym XF86AudioLowerVolume exec "amixer  -q sset Master,0 5- unmute"
     mode hide
     hidden_state hide
     modifier $mod
-    status_command      i3pystatus -c /home/ANT.AMAZON.COM/joopd/.config/i3pystatus.conf	
+    status_command i3status
+#i3status_command i3status
+#      i3bar
+#pystatus -c ~/.config/i3pystatus.conf	
     tray_padding         3
     font pango:Roboto    9
  	colors {
- 		# whole color settings
+# whole color settings
  		background   $black
  		statusline   $white
  		separator    $grey
- 
 # 		# type             border      backgr.     font
  		focused_workspace  $grey       $white      $black
  		active_workspace   $grey       $white      $black
@@ -247,32 +256,54 @@ bindsym XF86AudioLowerVolume exec "amixer  -q sset Master,0 5- unmute"
                }
 position top
         }
-
 #
 # Execute on boot
 #
-
     exec --no-startup-id dunst
-    exec --no-startup-id feh --bg-fill ~/.wallpaper.jpg
-#    exec --no-startup-id  compton -cCGfF -b -i 0.95 -I 200 -O 200  
+    exec --no-startup-id feh --bg-fill ~/.wallpaper2.jpg
+#    exec --no-startup-id  compton --config /home/ANT.AMAZON.COM/joopd/.config/picom/picom.conf
+#cCGfF -b -i 0.95 -I 200 -O 200  
     exec --no-startup-id nm-applet
-    exec --no-startup-id ~/.dotfiles/scripts/keyboard-switch-super.sh
+#    exec --no-startup-id ~/.dotfiles/scripts/keyboard-switch-super.sh
     exec --no-startup-id /usr/bin/sh /home/joop/.xinitrc
     exec --no-startup-id /usr/bin/xmodmap /home/joop/.Xmodmap 
-    exec --no-startup-id /usr/bin/sh /home/ANT.AMAZON.COM/joopd/.dotfiles/scripts/configure-xrandr.sh
-    exec --no-startup-id /usr/lib/gsd-xsettings
-#    exec --no-startup-id /usr/bin/flatpak run --branch=stable --arch=x86_64 --command=barrier com.github.debauchee.barrier
+#/home/ANT.AMAZON.COM/joopd/.dotfiles/scripts/configure-xrandr.sh
+#    exec --no-startup-id /usr/lib/gsd-xsettings
+##    exec --no-startup-id /usr/bin/flatpak run --branch=stable --arch=x86_64 --command=barrier com.github.debauchee.barrier
  
-#    exec --no-startup-id gnome-power-manager
-    exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+##    exec --no-startup-id gnome-power-manager
+#   exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
     exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
     exec --no-startup-id /usr/local/amazon/sbin/acmed-session.sh
-    exec --no-startup-id /usr/bin/indicator-cpufreq
+#    exec --no-startup-id /usr/bin/indicator-cpufreq
     exec --no-startup-id /usr/bin/user-hooks
-    exec --no-startup-id /usr/bin/chromium-browser --app=https://app.chime.aws/  
-    exec --no-startup-id /usr/bin/chromium-browser --app=https://booking.workplace.com/
-    exec --no-startup-id /usr/bin/chromium-browser --app=https://app.slack.com/client/T016M3G1GHZ/threads  
-    exec --no-startup-id /usr/bin/redshift 0.6
+    exec --no-startup-id /snap/bin/slack
+    exec --no-startup-id /usr/bin/google-chrome-stable --app=https://app.chime.aws/  
+#    exec --no-startup-id /usr/bin/google-chrome-stable --app=https://app.slack.com/client/T016M3G1GHZ
+#https://app.slack.com/client/T016M3G1GHZ/G018FCX68PL?selected_team_id=E015GUGD2V6
+#https://app.slack.com/client/T016M3G1GHZ/threads/thread/G017JSWTZCP-1601477306.051100  
+#   for_window [title=".*Chime.*"] move to workspace $tag1 
+
+#    exec --no-startup-id /usr/bin/firefox https://app.chime.aws/  
+ #   exec --no-startup-id /usr/bin/google-chrome-stable --app=firefox --app=https://booking.workplace.com/
+#    assign [class="Firefox" instance="Navigator"] $tag10
+#   for_window [title=".*Workplace.*"] move to workspace $tag1 
+
+ #   exec --no-startup-id /usr/bin/google-chrome-stable --app=https://app.asana.com/0/1151052836368700/list
+ #  exec --no-startup-id /usr/bin/workrave
+ #  exec --no-statup-id /usr/bin/google-chrome-stable --app=https://nc.joop.in/apps/news 
+#   for_window [title=".*Asana.*"] move to workspace $tag10 
+
+#    assign [class="Firefox" instance="Navigator"] $tag2
+
+#    exec --no-startup-id /snap/bin/slack
+#    for_window [class="*Slack*"] move to workspace $tag1 
+#firefox https://app.slack.com/client/T016M3G1GHZ/threads  
+#    exec --no-startup-id /usr/bin/firefox https://app.slack.com/client/T016M3G1GHZ/D01AXBF3Y8G/thread/C016MML1ULB-1601892403.180700
+#    exec --no-startup-id /usr/bin/redshift 0.6
+#    exec --no-startup-id i3-workspaces
+#    exec --no-startup-id /usr/bin/davmail
  #   exec --no-startup-id ~/.dotfiles/scripts/configure-xrandr.sh
-    exec --no-startup-id java -cp /opt/LanguageTool-4.9/languagetool-server.jar org.languagetool.server.HTTPServer --port 8081 --allow-origin "*"
+ #   exec --no-startup-id java -cp /opt/LanguageTool-5.1/languagetool-server.jar org.languagetool.server.HTTPServer --port 8081 --allow-origin "*"
     #exec --no-startup-id /home/ANT.AMAZON.COM/joopd/.screenlayout/vertical.sh 
+    exec --no-startup-id /bin/sh /home/ANT.AMAZON.COM/joopd/.screenlayout/1screen.sh
